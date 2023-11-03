@@ -1,0 +1,21 @@
+int main() {
+    unsigned int secretValue = 0x41414141;
+    char inputBuffer[22];
+
+    printf("Change the secret value from 0x41414141 to 0xdeadbeef!\n");
+    printf("Your chance: ");
+    scanf("%26s", inputBuffer);
+
+    printf("Input Buffer: %s\n", inputBuffer);
+    printf("Secret Value: 0x%08x\n", secretValue);
+
+    if (secretValue == 0xdeadbeef) {
+        setreuid(geteuid(), geteuid());
+        system("/bin/sh");
+    } else {
+        printf("WAY OFF!!!!\n");
+        exit(1);
+    }
+
+    return 0;
+}
